@@ -1,0 +1,8 @@
+{
+  "name": "InnogX Academy",
+  "description": "A comprehensive Learning Management System for African tech learners featuring gamification, parent-child linking, and course management.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
