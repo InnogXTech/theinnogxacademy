@@ -24,4 +24,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   }
+
+  "engines": {
+  "node": "20.x"
+  }
 }

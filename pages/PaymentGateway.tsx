@@ -204,16 +204,21 @@ const PaymentGateway: React.FC = () => {
         : (amount || 25000);
 
       // Save transaction to database
-      await supabase.from('transactions').insert({
-        user_id: session.user.id,
-        amount: finalAmount,
-        reference: reference,
-        type: type === 'enrollment' ? 'course_enrollment' : 'tuition_credit',
-        status: 'success',
-        date: new Date().toISOString(),
-        course_id: type === 'enrollment' ? course?.id : null,
-        item_name: type === 'enrollment' ? course?.title : 'Tuition Credit Deposit'
-      }).catch(e => console.log('Transaction save skipped (expected in demo):', e));
+      const { error } = await supabase.from('transactions').insert({
+      user_id: session.user.id,
+      amount: finalAmount,
+      reference: reference,
+      type: type === 'enrollment' ? 'course_enrollment' : 'tuition_credit',
+      status: 'success',
+      date: new Date().toISOString(),
+      course_id: type === 'enrollment' ? course?.id : null,
+      item_name: type === 'enrollment' ? course?.title : 'Tuition Credit Deposit'
+    });
+
+    if (error) {
+      console.log('Transaction save skipped (expected in demo):', error);
+    }
+
 
       setIsSuccess(true);
       
